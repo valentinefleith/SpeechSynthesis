@@ -77,7 +77,7 @@ def add_shwa(phrase_phonetique, phrase_ortho):
         phrase_finale += phrase_phonetique[i]
         if (
             i < len(phrase_phonetique) - 1
-            and phrase_ortho[i][-1] == "e"
+            and (phrase_ortho[i][-1] == "e" or phrase_ortho[i][-3:] == "ent")
             and phrase_phonetique[i + 1][0] in consonnes
             and mot_phon[-1] not in "@e"
         ):
