@@ -1,5 +1,7 @@
 import parselmouth as pm
 import textgrids
+import matplotlib.pyplot as plt
+from parselmouth.praat import call
 from sys import argv, exit
 
 
@@ -16,6 +18,7 @@ def main():
 
 def synthetise(phrase_ortho, sound, phonemes):
     phrase_phon = convert_sentence_SAMPA(phrase_ortho)
+    print(phrase_phon)
     debut = sound.extract_part(0, 0.01, pm.WindowShape.RECTANGULAR, 1, False)
     for i in range(len(phrase_phon) - 1):
         extraction = extract_diphone(phrase_phon[i] + phrase_phon[i + 1], sound, phonemes)
@@ -26,13 +29,28 @@ def synthetise(phrase_ortho, sound, phonemes):
 def extract_diphone(diphone, sound, phonemes):
     phoneme1 = diphone[0]
     phoneme2 = diphone[1]
-    for p1_index in range(len(phonemes) - 1):
+    for p1_index in range(len(phonemes) - 1):  # on peut peut etre enlever le moins 1
         p2_index = p1_index + 1
         if phonemes[p1_index].text == phoneme1 and phonemes[p2_index].text == phoneme2:
             milieu_p1 = trouver_milieu_phoneme(sound, phonemes, p1_index)
             milieu_p2 = trouver_milieu_phoneme(sound, phonemes, p2_index)
             extract = sound.extract_part(milieu_p1, milieu_p2, pm.WindowShape.RECTANGULAR, 1, False,)
+            extract = modif_duree(extract)
             return extract
+    return "DIPHONE NOT FOUND"
+
+
+def modif_duree(extraction):
+    """
+    Il faut que l'extrait ait une f0 donc verifier nb value > 0
+    """
+    allongement = 2
+    modif = call(extraction, "To Manipulation", 0.01, 75, 600)
+    duration_tier = call(modif, "Extract duration tier")
+    call(duration_tier, "Remove points between", 0, extraction.duration)
+    call(duration_tier, "Add point", extraction.duration / 2, allongement)
+    call([modif, duration_tier], "Replace duration tier")
+    return call(modif, "Get resynthesis (overlap-add)")
 
 
 def trouver_milieu_phoneme(sound, phonemes, index):
@@ -50,29 +68,8 @@ def convert_sentence_SAMPA(phrase_ortho):
 
 
 def add_shwa(phrase_phonetique, phrase_ortho):
-    consonnes = [
-        "p",
-        "t",
-        "k",
-        "f",
-        "s",
-        "S",
-        "b",
-        "d",
-        "g",
-        "v",
-        "z",
-        "j",
-        "l",
-        "R",
-        "n",
-        "N",
-        "m",
-        "w",
-        "H",
-        "Z",
-    ]
-    phrase_finale = ""
+    consonnes = "ptkfsSbdgvzjlRnNmwHZ"
+    phrase_finale = "_"
     for i, mot_phon in enumerate(phrase_phonetique):
         phrase_finale += phrase_phonetique[i]
         if (
@@ -82,6 +79,7 @@ def add_shwa(phrase_phonetique, phrase_ortho):
             and mot_phon[-1] not in "@e"
         ):
             phrase_finale += "@"
+    # phrase_finale += "_"
     return phrase_finale
 
 
