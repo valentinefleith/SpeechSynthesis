@@ -50,7 +50,7 @@ def modif_duree(extraction):
     """
     Il faut que l'extrait ait une f0 donc verifier nb value > 0
     """
-    allongement = 1
+    allongement = 0.85
     modif = call(extraction, "To Manipulation", 0.01, 75, 600)
     duration_tier = call(modif, "Extract duration tier")
     call(duration_tier, "Remove points between", 0, extraction.duration)
