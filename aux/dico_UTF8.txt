@@ -1,4 +1,5 @@
 orthographe	phonetique
+A	a
 A7	asEt
 ABB	abebe
 ABCD	abesede
