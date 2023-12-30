@@ -11,7 +11,7 @@ item []:
         name = "diphones" 
         xmin = 0 
         xmax = 358.81795918367345 
-        intervals: size = 82 
+        intervals: size = 91 
         intervals [1]:
             xmin = 0 
             xmax = 0.09433679289083079 
@@ -338,5 +338,41 @@ item []:
             text = "E" 
         intervals [82]:
             xmin = 89.4052414641763 
+            xmax = 92.44068414883226 
+            text = "" 
+        intervals [83]:
+            xmin = 92.44068414883226 
+            xmax = 92.6396578268058 
+            text = "R" 
+        intervals [84]:
+            xmin = 92.6396578268058 
+            xmax = 92.85143098114023 
+            text = "a" 
+        intervals [85]:
+            xmin = 92.85143098114023 
+            xmax = 95.74408100730653 
+            text = "" 
+        intervals [86]:
+            xmin = 95.74408100730653 
+            xmax = 95.88836601355635 
+            text = "R" 
+        intervals [87]:
+            xmin = 95.88836601355635 
+            xmax = 96.05824997252792 
+            text = "m" 
+        intervals [88]:
+            xmin = 96.05824997252792 
+            xmax = 99.30327170423901 
+            text = "" 
+        intervals [89]:
+            xmin = 99.30327170423901 
+            xmax = 99.50806332601294 
+            text = "e" 
+        intervals [90]:
+            xmin = 99.50806332601294 
+            xmax = 99.69074676134538 
+            text = "p" 
+        intervals [91]:
+            xmin = 99.69074676134538 
             xmax = 358.81795918367345 
             text = "" 
