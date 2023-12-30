@@ -11,33 +11,39 @@ def main():
     sound = pm.Sound(argv[1])
     segmentation = textgrids.TextGrid(argv[2])
     phonemes = segmentation["diphones"]
-    phrase_ortho = "la ligne de métro quatorze"
-    synthese = synthetise(phrase_ortho, sound, phonemes)
+    phrase_ortho = "la ligne de métro quatorze sera fermée pour cause de travaux"
+    extracts = get_extracts(phrase_ortho, sound, phonemes)
+    synthetise(sound, extracts)
+
+
+def synthetise(sound, extracts):
+    synthese = sound.extract_part(0, 0.01, pm.WindowShape.RECTANGULAR, 1, False)
+    synthese = synthese.concatenate(extracts, overlap=0.03)
     synthese.save('wav-files/synthese.wav', "WAV")
 
 
-def synthetise(phrase_ortho, sound, phonemes):
+def get_extracts(phrase_ortho, sound, phonemes):
+    extracts = []
     phrase_phon = convert_sentence_SAMPA(phrase_ortho)
     print(phrase_phon)
-    debut = sound.extract_part(0, 0.01, pm.WindowShape.RECTANGULAR, 1, False)
     for i in range(len(phrase_phon) - 1):
         extraction = extract_diphone(phrase_phon[i] + phrase_phon[i + 1], sound, phonemes)
-        debut = debut.concatenate([debut, extraction])
-    return debut
+        extracts.append(extraction)
+    return extracts
 
 
 def extract_diphone(diphone, sound, phonemes):
     phoneme1 = diphone[0]
     phoneme2 = diphone[1]
-    for p1_index in range(len(phonemes) - 1):  # on peut peut etre enlever le moins 1
+    for p1_index in range(len(phonemes) - 1):
         p2_index = p1_index + 1
-        if phonemes[p1_index].text == phoneme1 and phonemes[p2_index].text == phoneme2:
-            milieu_p1 = trouver_milieu_phoneme(sound, phonemes, p1_index)
-            milieu_p2 = trouver_milieu_phoneme(sound, phonemes, p2_index)
+        if phonemes[p1_index].text.strip() == phoneme1 and phonemes[p2_index].text.strip() == phoneme2:
+            milieu_p1 = find_middle_phoneme(sound, phonemes, p1_index)
+            milieu_p2 = find_middle_phoneme(sound, phonemes, p2_index)
             extract = sound.extract_part(milieu_p1, milieu_p2, pm.WindowShape.RECTANGULAR, 1, False,)
             extract = modif_duree(extract)
             return extract
-    return "DIPHONE NOT FOUND"
+    return f"DIPHONE NOT FOUND : {diphone}"
 
 
 def modif_duree(extraction):
@@ -53,8 +59,8 @@ def modif_duree(extraction):
     return call(modif, "Get resynthesis (overlap-add)")
 
 
-def trouver_milieu_phoneme(sound, phonemes, index):
-    milieu = phonemes[index].xmin + (phonemes[index].xmax - phonemes[index].xmin) / 2
+def find_middle_phoneme(sound, phonemes, index):
+    milieu = (phonemes[index].xmax + phonemes[index].xmin) / 2
     milieu = sound.get_nearest_zero_crossing(milieu, 1)
     return milieu
 
