@@ -11,7 +11,7 @@ def main():
     sound = pm.Sound(argv[1])
     segmentation = textgrids.TextGrid(argv[2])
     phonemes = segmentation["diphones"]
-    phrase_ortho = "la ligne de métro quatorze sera fermée pour cause de travaux"
+    phrase_ortho = "la ligne de métro quatorze sera fermée pour cause de travaux pendant deux semaines"
     extracts = get_extracts(phrase_ortho, sound, phonemes)
     synthetise(sound, extracts)
 
@@ -85,7 +85,7 @@ def add_shwa(phrase_phonetique, phrase_ortho):
             and mot_phon[-1] not in "@e"
         ):
             phrase_finale += "@"
-    # phrase_finale += "_"
+    phrase_finale += "_"
     return phrase_finale
 
 
@@ -94,6 +94,12 @@ def create_dictionary(path="aux/dico_UTF8.txt"):
     with open(path, "r") as dico:
         for ligne in dico:
             orth, sampa = ligne.strip().split("\t")
+            if "a~" in sampa:
+                sampa = sampa.replace("a~", "A")
+            if "e~" in sampa:
+                sampa = sampa.replace("e~", "1")
+            if "o~" in sampa:
+                sampa = sampa.replace("o~", "C")
             dictionary[orth] = sampa
     return dictionary
 
