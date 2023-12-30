@@ -19,6 +19,6 @@ git clone https://github.com/valentinefleith/SpeechSynthesis.git
 Then run the script using the following command :
 
 ```
-python3 src/synthese.py wav-files/Logatomes.wav wav-files/Logatomes.TextGrid
+python3 src/synthetise.py wav-files/Logatomes.wav wav-files/Logatomes.TextGrid
 open wav-files/synthese.wav
 ```
