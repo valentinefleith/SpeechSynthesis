@@ -13,7 +13,7 @@ def main():
     phonemes = segmentation["diphones"]
     phrase_ortho = "la ligne de métro quatorze"
     synthese = synthetise(phrase_ortho, sound, phonemes)
-    synthese.save('synthese.wav', "WAV")
+    synthese.save('wav-files/synthese.wav', "WAV")
 
 
 def synthetise(phrase_ortho, sound, phonemes):
@@ -44,7 +44,7 @@ def modif_duree(extraction):
     """
     Il faut que l'extrait ait une f0 donc verifier nb value > 0
     """
-    allongement = 2
+    allongement = 1
     modif = call(extraction, "To Manipulation", 0.01, 75, 600)
     duration_tier = call(modif, "Extract duration tier")
     call(duration_tier, "Remove points between", 0, extraction.duration)
@@ -83,7 +83,7 @@ def add_shwa(phrase_phonetique, phrase_ortho):
     return phrase_finale
 
 
-def create_dictionary(path="dico_UTF8.txt"):
+def create_dictionary(path="aux/dico_UTF8.txt"):
     dictionary = {}
     with open(path, "r") as dico:
         for ligne in dico:
