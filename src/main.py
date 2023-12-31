@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 from parselmouth.praat import call
 import sys
 
-from prosody import modif_duree, modif_f0
 sys.path.insert(0, "utils")
 
+from prosody import modif_duree, modif_f0
 from conversion import convert_sentence_SAMPA
 
 
@@ -16,14 +16,16 @@ def main():
     sound = pm.Sound(sys.argv[1])
     segmentation = textgrids.TextGrid(sys.argv[2])
     phonemes = segmentation["diphones"]
-    phrases_ortho = [
-        "tout les travaux sur la ligne quatorze sont ratés",
-        "j' ai raté le RER A tous les jours pendant quatorze semaines",
-        "j' ai raté le RER A à cause des travaux sur la ligne quatorze du métro",
-        "les travaux interrompent le trafic sur la ligne quatorze",
-        "le trafic du RER A sera interrompu pendant deux semaines",
-        "la ligne de métro quatorze sera fermée pour cause de travaux pendant deux semaines",
-    ]
+    with open("../aux/phrases.txt", "r") as phrases:
+        phrases_ortho = phrases.readlines()
+    # phrases_ortho = [
+    #     "tout les travaux sur la ligne quatorze sont ratés",
+    #     "j' ai raté le RER A tous les jours pendant quatorze semaines",
+    #     "j' ai raté le RER A à cause des travaux sur la ligne quatorze du métro",
+    #     "les travaux interrompent le trafic sur la ligne quatorze",
+    #     "le trafic du RER A sera interrompu pendant deux semaines",
+    #     "la ligne de métro quatorze sera fermée pour cause de travaux pendant deux semaines",
+    # ]
     extracts = get_extracts(phrases_ortho[5], sound, phonemes)
     synthetise(sound, extracts)
 
