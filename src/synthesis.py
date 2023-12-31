@@ -11,7 +11,12 @@ def main():
     sound = pm.Sound(argv[1])
     segmentation = textgrids.TextGrid(argv[2])
     phonemes = segmentation["diphones"]
-    phrase_ortho = "la ligne de métro quatorze sera fermée pour cause de travaux pendant deux semaines"
+    phrase_ortho = "tout les travaux sur la ligne quatorze sont ratés"
+    #phrase_ortho = "j' ai raté le RER A tous les jours pendant quatorze semaines"
+    #phrase_ortho = "j' ai raté le RER A à cause des travaux sur la ligne quatorze du métro"
+    #phrase_ortho = "les travaux interrompent le trafic sur la ligne quatorze"
+    #phrase_ortho = "le trafic du RER A sera interrompu pendant deux semaines"
+    #phrase_ortho = "la ligne de métro quatorze sera fermée pour cause de travaux pendant deux semaines"
     extracts = get_extracts(phrase_ortho, sound, phonemes)
     synthetise(sound, extracts)
 
@@ -28,7 +33,8 @@ def get_extracts(phrase_ortho, sound, phonemes):
     print(phrase_phon)
     for i in range(len(phrase_phon) - 1):
         extraction = extract_diphone(phrase_phon[i] + phrase_phon[i + 1], sound, phonemes)
-        extracts.append(extraction)
+        if extraction:
+            extracts.append(extraction)
     return extracts
 
 
@@ -43,7 +49,7 @@ def extract_diphone(diphone, sound, phonemes):
             extract = sound.extract_part(milieu_p1, milieu_p2, pm.WindowShape.RECTANGULAR, 1, False,)
             extract = modif_duree(extract)
             return extract
-    return f"DIPHONE NOT FOUND : {diphone}"
+    #return f"DIPHONE NOT FOUND : {diphone}"
 
 
 def modif_duree(extraction):
