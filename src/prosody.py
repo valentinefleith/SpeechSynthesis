@@ -27,10 +27,6 @@ def modif_duree(extraction):
 
 
 def modif_f0(synthese, tokens, segmentation):
-    """
-    Il faut que l'extrait ait une f0 donc verifier nb value > 0
-    """
-    # allongement = 0.85
     modif = call(synthese, "To Manipulation", 0.01, 75, 600)
     pitch_tier = call(modif, "Extract pitch tier")
     call(pitch_tier, "Remove points between", 0, synthese.duration)

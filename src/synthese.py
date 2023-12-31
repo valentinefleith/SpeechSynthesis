@@ -13,7 +13,6 @@ def synthetise(sound, extracts):
     synthese = sound.extract_part(0, 0.01, pm.WindowShape.RECTANGULAR, 1, False)
     synthese = synthese.concatenate(extracts, overlap=0.03)
     return synthese
-    #synthese = modif_f0(synthese)
 
 
 def get_extracts(phrase_ortho, sound, phonemes):
@@ -47,7 +46,7 @@ def extract_diphone(diphone, sound, phonemes):
                 1,
                 False,
             )
-            extract = modif_duree(extract)
+            # extract = modif_duree(extract)
             return extract
     return f"DIPHONE NOT FOUND : {diphone}"
 

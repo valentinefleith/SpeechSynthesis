@@ -3,7 +3,7 @@ import textgrids
 import sys
 
 from synthese import get_extracts, synthetise
-from prosody import modif_duree, modif_f0
+from prosody import modif_f0
 
 
 def main():
@@ -16,6 +16,8 @@ def main():
         phrases_ortho = phrases.readlines()
     extracts = get_extracts(phrases_ortho[0].strip(), sound, phonemes)
     synthese = synthetise(sound, extracts)
+    text = parse_phrase(phrase_ortho[0], synthese)
+    synthese = modif_f0(synthese)
     synthese.save("wav-files/synthese.wav", "WAV")
 
 
