@@ -3,8 +3,6 @@ import textgrids
 import sys
 
 from synthese import get_extracts, synthetise
-sys.path.insert(0, "utils")
-
 from prosody import modif_duree, modif_f0
 
 
