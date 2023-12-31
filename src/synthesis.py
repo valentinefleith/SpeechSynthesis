@@ -13,13 +13,8 @@ def main():
     sound = pm.Sound(argv[1])
     segmentation = textgrids.TextGrid(argv[2])
     phonemes = segmentation["diphones"]
-    phrase_ortho = "tout les travaux sur la ligne quatorze sont ratés"
-    # phrase_ortho = "j' ai raté le RER A tous les jours pendant quatorze semaines"
-    # phrase_ortho = "j' ai raté le RER A à cause des travaux sur la ligne quatorze du métro"
-    # phrase_ortho = "les travaux interrompent le trafic sur la ligne quatorze"
-    # phrase_ortho = "le trafic du RER A sera interrompu pendant deux semaines"
-    # phrase_ortho = "la ligne de métro quatorze sera fermée pour cause de travaux pendant deux semaines"
-    extracts = get_extracts(phrase_ortho, sound, phonemes)
+    phrases_ortho = ["tout les travaux sur la ligne quatorze sont ratés", "j' ai raté le RER A tous les jours pendant quatorze semaines", "j' ai raté le RER A à cause des travaux sur la ligne quatorze du métro", "les travaux interrompent le trafic sur la ligne quatorze", "le trafic du RER A sera interrompu pendant deux semaines", "la ligne de métro quatorze sera fermée pour cause de travaux pendant deux semaines"]
+    extracts = get_extracts(phrases_ortho[2], sound, phonemes)
     synthetise(sound, extracts)
 
 
