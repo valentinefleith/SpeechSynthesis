@@ -5,7 +5,7 @@ import sys
 
 sys.path.insert(0, "utils")
 
-from prosody import modif_duree, modif_f0
+from prosody import modif_duration, modif_f0
 from conversion import convert_sentence_SAMPA
 
 
@@ -46,7 +46,7 @@ def extract_diphone(diphone, sound, phonemes):
                 1,
                 False,
             )
-            extract = modif_duree(extract)
+            extract = modif_duration(extract, 0.85)
             return extract
     #return f"DIPHONE NOT FOUND : {diphone}"
 

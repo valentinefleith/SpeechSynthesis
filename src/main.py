@@ -3,7 +3,7 @@ import textgrids
 import sys
 
 from synthese import get_extracts, synthetise
-from prosody import modif_f0
+from prosody import modif_f0, find_phoneme_to_lengthen
 
 
 def main():
@@ -17,8 +17,10 @@ def main():
     sentence_nb = get_sentence_to_synthetise(phrases_ortho)
     extracts = get_extracts(phrases_ortho[sentence_nb].strip(), sound, phonemes)
     synthese = synthetise(sound, extracts)
+    synthese.save("wav-files/synthese.wav", "WAV")
     #text = parse_phrase(phrase_ortho[0], synthese)
-    #synthese = modif_f0(synthese)
+    synthese = modif_f0(synthese)
+    #synthese = find_phoneme_to_lengthen(synthese)
     synthese.save("wav-files/synthese.wav", "WAV")
 
 
