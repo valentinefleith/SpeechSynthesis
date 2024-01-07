@@ -8,9 +8,11 @@ from prosody import modif_f0, find_phoneme_to_lengthen
 
 def main():
     if len(sys.argv) != 3:
-        sys.exit("Usage : python3 synthese.py fichier_wav fichier_textgrid")
-    sound = pm.Sound(sys.argv[1])
-    segmentation = textgrids.TextGrid(sys.argv[2])
+        sound = pm.Sound("wav-files/Logatomes.wav")
+        segmentation = textgrids.TextGrid("wav-files/Logatomes.TextGrid")
+    else:
+        sound = pm.Sound(sys.argv[1])
+        segmentation = textgrids.TextGrid(sys.argv[2])
     phonemes = segmentation["diphones"]
     with open("aux/phrases.txt", "r") as phrases:
         phrases_ortho = phrases.readlines()
@@ -18,9 +20,8 @@ def main():
     extracts = get_extracts(phrases_ortho[sentence_nb].strip(), sound, phonemes)
     synthese = synthetise(sound, extracts)
     synthese.save("wav-files/synthese.wav", "WAV")
-    #text = parse_phrase(phrase_ortho[0], synthese)
-    synthese = modif_f0(synthese)
-    #synthese = find_phoneme_to_lengthen(synthese)
+    synthese = modif_f0(synthese, get_modalite())
+    synthese = find_phoneme_to_lengthen(synthese)
     synthese.save("wav-files/synthese.wav", "WAV")
 
 
@@ -36,7 +37,13 @@ def get_sentence_to_synthetise(phrases_ortho):
     print("Vous avez entré trois numéros incorrects à la suite.")
     print("Par défaut, nous prendrons la première phrase.")
     return 0
-        
+
+
+def get_modalite():
+    print("Quelle modalité voulez-vous pour la phrase ?")
+    print("1 : Déclarative\n2 : Interrogative\n3:Exclamative")
+    nb = input("Entrez le numéro correspondant :")
+    return int(nb)
 
 if __name__ == "__main__":
     main()
