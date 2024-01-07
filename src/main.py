@@ -22,7 +22,7 @@ def main():
     synthese = synthetise(sound, extracts)
     synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
     synthese = modif_f0(synthese, get_modalite())
-    #synthese = find_phoneme_to_lengthen(synthese)
+    #synthese = find_phoneme_to_lengthen(synthese, sentence_nb)
     synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
     subprocess.run(["open", f"wav-files/synthese_phrase{sentence_nb}.wav"])
 

@@ -39,7 +39,7 @@ def modif_f0(synthese, modalite):
     return call(modif, "Get resynthesis (overlap-add)")
 
 
-def find_phoneme_to_lengthen(synthese):
+def find_phoneme_to_lengthen(synthese, nb_phrase):
     segmentation = textgrids.TextGrid("wav-files/synthese.TextGrid")
     phrase = segmentation["mots"]
     phonemes = segmentation["phonemes"]
@@ -52,9 +52,9 @@ def find_phoneme_to_lengthen(synthese):
     print("je suis ici")
     for i, phoneme in enumerate(phonemes):
         if phonemes[i].xmin >= mot_a_allonger.xmin and phonemes[i].xmax <= mot_a_allonger.xmax:
-            #if (is_stressed(phoneme)):
-            if phoneme.text == "O":
-                return modif_duration_phrase(synthese, phoneme)
+            if is_stressed(phoneme, nb_phrase):
+                if phoneme.text == "O":
+                    return modif_duration_phrase(synthese, phoneme)
 
 
 def modif_duration_phrase(synthese, phoneme):
@@ -69,3 +69,11 @@ def modif_duration_phrase(synthese, phoneme):
     call(duration_tier, "Add point", (phoneme.xmax + phoneme.xmin) / 2, allongement)
     call([modif, duration_tier], "Replace duration tier")
     return call(modif, "Get resynthesis (overlap-add)")
+
+
+def is_stressed(phoneme, nb_phrase):
+    if nb_phrase == 0:
+        return phoneme.text == "0"
+    if nb_phrase == 1:
+        return phoneme.text == "a"
+    return False
