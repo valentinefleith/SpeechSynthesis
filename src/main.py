@@ -14,12 +14,27 @@ def main():
     phonemes = segmentation["diphones"]
     with open("aux/phrases.txt", "r") as phrases:
         phrases_ortho = phrases.readlines()
-    extracts = get_extracts(phrases_ortho[0].strip(), sound, phonemes)
+    sentence_nb = get_sentence_to_synthetise(phrases_ortho)
+    extracts = get_extracts(phrases_ortho[sentence_nb].strip(), sound, phonemes)
     synthese = synthetise(sound, extracts)
-    text = parse_phrase(phrase_ortho[0], synthese)
-    synthese = modif_f0(synthese)
+    #text = parse_phrase(phrase_ortho[0], synthese)
+    #synthese = modif_f0(synthese)
     synthese.save("wav-files/synthese.wav", "WAV")
 
+
+def get_sentence_to_synthetise(phrases_ortho):
+    print("Quelle phrase voulez-vous synthétiser ? Vous avez le choix entre les phrases suivantes :\n")
+    for i, phrase in enumerate(phrases_ortho):
+        print(f"{i}) {phrase.replace('tout', 'tous')}")
+    for i in range(3):
+        nb = input("Entrez le numéro correspondant à la phrase : ")
+        if not nb.isdigit() or int(nb) < 0 or int(nb) > 7:
+            continue
+        return int(nb)
+    print("Vous avez entré trois numéros incorrects à la suite.")
+    print("Par défaut, nous prendrons la première phrase.")
+    return 0
+        
 
 if __name__ == "__main__":
     main()
