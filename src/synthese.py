@@ -48,7 +48,7 @@ def extract_diphone(diphone, sound, phonemes):
             )
             extract = modif_duration(extract, 0.85)
             return extract
-    #return f"DIPHONE NOT FOUND : {diphone}"
+    return f"DIPHONE NOT FOUND : {diphone}"
 
 
 def find_middle_phoneme(sound, phonemes, index):

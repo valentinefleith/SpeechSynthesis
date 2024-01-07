@@ -20,5 +20,6 @@ Then run the script using the following command :
 
 ```
 python3 src/main.py wav-files/Logatomes.wav wav-files/Logatomes.TextGrid
-open wav-files/synthese.wav
 ```
+
+Arguments are optional.

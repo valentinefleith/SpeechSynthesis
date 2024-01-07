@@ -1,6 +1,7 @@
 import parselmouth as pm
 import textgrids
 import sys
+import subprocess
 
 from synthese import get_extracts, synthetise
 from prosody import modif_f0, find_phoneme_to_lengthen
@@ -19,10 +20,11 @@ def main():
     sentence_nb = get_sentence_to_synthetise(phrases_ortho)
     extracts = get_extracts(phrases_ortho[sentence_nb].strip(), sound, phonemes)
     synthese = synthetise(sound, extracts)
-    synthese.save("wav-files/synthese.wav", "WAV")
+    synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
     synthese = modif_f0(synthese, get_modalite())
     synthese = find_phoneme_to_lengthen(synthese)
-    synthese.save("wav-files/synthese.wav", "WAV")
+    synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
+    subprocess.run(["open", f"wav-files/synthese_phrase{sentence_nb}.wav"])
 
 
 def get_sentence_to_synthetise(phrases_ortho):
