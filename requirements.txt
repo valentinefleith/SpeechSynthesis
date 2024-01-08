@@ -1,0 +1,2 @@
+praat-parselmouth==0.4.3
+praat-textgrids==1.4.0

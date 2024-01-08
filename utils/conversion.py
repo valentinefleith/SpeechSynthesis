@@ -1,4 +1,3 @@
-
 def convert_sentence_SAMPA(phrase_ortho):
     dictionary = create_dictionary()
     converted = []
@@ -36,4 +35,3 @@ def create_dictionary(path="aux/dico_UTF8.txt"):
                 sampa = sampa.replace("o~", "C")
             dictionary[orth] = sampa
     return dictionary
-

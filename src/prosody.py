@@ -3,12 +3,14 @@ import textgrids
 from parselmouth.praat import call
 from Sentence import Sentence
 
-VERBS = ["sera", "interrompent", "ai", "sont"]
-
 
 def modif_prosody(synthese, sentence_nb, modalite):
-    segmentation = textgrids.TextGrid(f"wav-files/synthese_phrase{sentence_nb}.TextGrid")
-    sentence = Sentence(sentence_nb, segmentation["mots"], segmentation["phonemes"], modalite)
+    segmentation = textgrids.TextGrid(
+        f"wav-files/synthese_phrase{sentence_nb}.TextGrid"
+    )
+    sentence = Sentence(
+        sentence_nb, segmentation["mots"], segmentation["phonemes"], modalite
+    )
     verb_index = sentence.get_verb_index()
     synthese = modif_f0(synthese, sentence, verb_index)
     synthese = modif_duration_phrase(synthese, sentence, verb_index)
@@ -51,8 +53,18 @@ def modif_duration_phrase(synthese, sentence, verb_index):
     call(duration_tier, "Remove points between", 0, synthese.duration)
     stressed_index = sentence.get_stressed_phoneme_index(verb_index)
     call(duration_tier, "Add point", sentence.phonemes[stressed_index].xmin - 0.5, 1)
-    call(duration_tier, "Add point", sentence.phonemes[stressed_index].xmin - 0.5 + 0.001, allongement)
-    call(duration_tier, "Add point", sentence.phonemes[stressed_index].xmax - 0.5 - 0.001, allongement)
+    call(
+        duration_tier,
+        "Add point",
+        sentence.phonemes[stressed_index].xmin - 0.5 + 0.001,
+        allongement,
+    )
+    call(
+        duration_tier,
+        "Add point",
+        sentence.phonemes[stressed_index].xmax - 0.5 - 0.001,
+        allongement,
+    )
     call(duration_tier, "Add point", sentence.phonemes[stressed_index].xmax - 0.5, 1)
     call([modif, duration_tier], "Replace duration tier")
     return call(modif, "Get resynthesis (overlap-add)")

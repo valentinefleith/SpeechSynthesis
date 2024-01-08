@@ -26,7 +26,9 @@ def main():
 
 
 def get_sentence_to_synthetise(phrases_ortho):
-    print("Quelle phrase voulez-vous synthétiser ? Vous avez le choix entre les phrases suivantes :\n")
+    print(
+        "Quelle phrase voulez-vous synthétiser ? Vous avez le choix entre les phrases suivantes :\n"
+    )
     for i, phrase in enumerate(phrases_ortho):
         print(f"{i}) {phrase.replace('tout', 'tous')}")
     for i in range(3):
@@ -46,7 +48,9 @@ def get_modalite():
         print(f"{i} : {modalite}\n")
     nb = input("Entrez le numéro correspondant :")
     if not nb.isdigit() or int(nb) < 0 or int(nb) > 2:
-        print("Vous avez entré un mauvais chiffre. Par défaut, nous prendrons la modalité assertive.")
+        print(
+            "Vous avez entré un mauvais chiffre. Par défaut, nous prendrons la modalité assertive."
+        )
         return 0
     return int(nb)
 
