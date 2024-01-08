@@ -43,10 +43,10 @@ def get_sentence_to_synthetise(phrases_ortho):
 
 def get_modalite():
     modalites = ["Assertive", "Interrogative", "Exclamative"]
-    print("\nQuelle modalité voulez-vous pour la phrase ?")
+    print("\nQuelle modalité voulez-vous pour la phrase ?\n")
     for i, modalite in enumerate(modalites):
         print(f"{i} : {modalite}\n")
-    nb = input("Entrez le numéro correspondant :")
+    nb = input("Entrez le numéro correspondant : ")
     if not nb.isdigit() or int(nb) < 0 or int(nb) > 2:
         print(
             "Vous avez entré un mauvais chiffre. Par défaut, nous prendrons la modalité assertive."
