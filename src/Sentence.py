@@ -17,8 +17,8 @@ class Sentence:
     def get_stressed_phoneme_index(self, verb_index):
         mot_a_allonger = self.mots[verb_index - 1]
         for i, phoneme in enumerate(self.phonemes):
-            if self.phonemes[i].xmin >= mot_a_allonger.xmin and self.phonemes[i].xmax <= mot_a_allonger.xmax:
-                if self.is_stressed(self.phonemes[i].text):
+            if phoneme.xmin >= mot_a_allonger.xmin and phoneme.xmax <= mot_a_allonger.xmax:
+                if self.is_stressed(phoneme.text):
                     return i
         return -1
 

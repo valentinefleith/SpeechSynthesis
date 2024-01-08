@@ -2,7 +2,7 @@ File type = "ooTextFile"
 Object class = "TextGrid"
 
 xmin = 0 
-xmax = 358.81795918367345 
+xmax = 381.573515 
 tiers? <exists> 
 size = 1 
 item []: 
@@ -10,8 +10,8 @@ item []:
         class = "IntervalTier" 
         name = "diphones" 
         xmin = 0 
-        xmax = 358.81795918367345 
-        intervals: size = 307 
+        xmax = 381.573515 
+        intervals: size = 328 
         intervals [1]:
             xmin = 0 
             xmax = 0.09433679289083079 
@@ -1238,5 +1238,89 @@ item []:
             text = "k" 
         intervals [307]:
             xmin = 357.6729901104069 
-            xmax = 358.81795918367345 
+            xmax = 359.782155565951 
+            text = "" 
+        intervals [308]:
+            xmin = 359.782155565951 
+            xmax = 359.96053087228444 
+            text = "p" 
+        intervals [309]:
+            xmin = 359.96053087228444 
+            xmax = 360.1574098411006 
+            text = "@" 
+        intervals [310]:
+            xmin = 360.1574098411006 
+            xmax = 362.03606773637773 
+            text = "" 
+        intervals [311]:
+            xmin = 362.03606773637773 
+            xmax = 362.3195438456131 
+            text = "o" 
+        intervals [312]:
+            xmin = 362.3195438456131 
+            xmax = 362.64594845180835 
+            text = "1" 
+        intervals [313]:
+            xmin = 362.64594845180835 
+            xmax = 364.63784876147975 
+            text = "" 
+        intervals [314]:
+            xmin = 364.63784876147975 
+            xmax = 364.9124431127234 
+            text = "e" 
+        intervals [315]:
+            xmin = 364.9124431127234 
+            xmax = 365.0397483106045 
+            text = "l" 
+        intervals [316]:
+            xmin = 365.0397483106045 
+            xmax = 367.4300902638719 
+            text = "" 
+        intervals [317]:
+            xmin = 367.4300902638719 
+            xmax = 367.6706378761473 
+            text = "a" 
+        intervals [318]:
+            xmin = 367.6706378761473 
+            xmax = 367.83791098499114 
+            text = "k" 
+        intervals [319]:
+            xmin = 367.83791098499114 
+            xmax = 370.2517540478111 
+            text = "" 
+        intervals [320]:
+            xmin = 370.2517540478111 
+            xmax = 370.46861697210863 
+            text = "o" 
+        intervals [321]:
+            xmin = 370.46861697210863 
+            xmax = 370.6973222403951 
+            text = "s" 
+        intervals [322]:
+            xmin = 370.6973222403951 
+            xmax = 373.3939605144935 
+            text = "" 
+        intervals [323]:
+            xmin = 373.3939605144935 
+            xmax = 373.6352482732682 
+            text = "u" 
+        intervals [324]:
+            xmin = 373.6352482732682 
+            xmax = 373.8069622611079 
+            text = "Z" 
+        intervals [325]:
+            xmin = 373.8069622611079 
+            xmax = 379.12104896667677 
+            text = "" 
+        intervals [326]:
+            xmin = 379.12104896667677 
+            xmax = 379.26315709454406 
+            text = "Z" 
+        intervals [327]:
+            xmin = 379.26315709454406 
+            xmax = 379.4696579678513 
+            text = "u" 
+        intervals [328]:
+            xmin = 379.4696579678513 
+            xmax = 381.573515 
             text = "" 
