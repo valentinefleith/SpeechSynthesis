@@ -1,4 +1,4 @@
-VERBS = ["sera", "interrompent", "ai", "sont"]
+VERBS = ["sera", "interrompent", "raté", "sont"]
 
 
 class Sentence:
