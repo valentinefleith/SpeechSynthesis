@@ -7016,7 +7016,7 @@ ahurissantes	ayRisa~t
 ahurissants	ayRisa~
 ahurissement	ayRis@ma~
 ahurissements	ayRis@ma~
-ai	e
+ai	E
 aida	eda
 aidai	ede
 aidaient	edE

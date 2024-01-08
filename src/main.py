@@ -20,6 +20,7 @@ def main():
     sentence_nb = get_sentence_to_synthetise(phrases_ortho)
     extracts = get_extracts(phrases_ortho[sentence_nb].strip(), sound, phonemes)
     synthese = synthetise(sound, extracts)
+    synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
     synthese_modifiee = modif_prosody(synthese, sentence_nb, get_modalite())
     synthese_modifiee.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
     subprocess.run(["open", f"wav-files/synthese_phrase{sentence_nb}.wav"])

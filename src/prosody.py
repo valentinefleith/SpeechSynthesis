@@ -35,8 +35,8 @@ def modif_f0(synthese, sentence, verb_index):
     call(pitch_tier, "Add point", 0.01, 190)
     if sentence.modalite == 0:
         call(pitch_tier, "Add point", synthese.duration - 0.0001, 180)
-    elif sentence.modalite == "interrogative":
-        call(pitch_tier, "Add point", synthese.duration - 0.0001, 180)
+    elif sentence.modalite == 1:
+        call(pitch_tier, "Add point", synthese.duration - 0.0001, 250)
     elif sentence.modalite == "exclamative":
         call(pitch_tier, "Add point", synthese.duration - 0.0001, 180)
     call(pitch_tier, "Add point", sentence.mots[verb_index].xmax, 230)
