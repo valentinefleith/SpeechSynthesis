@@ -12,7 +12,7 @@ def modif_prosody(synthese, sentence_nb, modalite):
     verb_index = sentence.get_verb_index()
     synthese = modif_f0(synthese, sentence, verb_index)
     synthese = modif_duration_phrase(synthese, sentence, verb_index)
-    return synthese
+    synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
 
 
 def modif_duration(extraction, allongement):
