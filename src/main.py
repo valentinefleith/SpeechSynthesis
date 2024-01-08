@@ -20,11 +20,8 @@ def main():
     sentence_nb = get_sentence_to_synthetise(phrases_ortho)
     extracts = get_extracts(phrases_ortho[sentence_nb].strip(), sound, phonemes)
     synthese = synthetise(sound, extracts)
-    #synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
-    synthese = modif_prosody(synthese, sentence_nb, get_modalite())
-    #synthese = modif_f0(synthese, get_modalite())
-    #synthese = find_phoneme_to_lengthen(synthese, sentence_nb)
-    synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
+    synthese_modifiee = modif_prosody(synthese, sentence_nb, get_modalite())
+    synthese_modifiee.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
     subprocess.run(["open", f"wav-files/synthese_phrase{sentence_nb}.wav"])
 
 
@@ -43,9 +40,14 @@ def get_sentence_to_synthetise(phrases_ortho):
 
 
 def get_modalite():
+    modalites = ["Assertive", "Interrogative", "Exclamative"]
     print("\nQuelle modalité voulez-vous pour la phrase ?")
-    print("0 : Déclarative\n1 : Interrogative\n2 : Exclamative\n")
+    for i, modalite in enumerate(modalites):
+        print(f"{i} : {modalite}\n")
     nb = input("Entrez le numéro correspondant :")
+    if not nb.isdigit() or int(nb) < 0 or int(nb) > 2:
+        print("Vous avez entré un mauvais chiffre. Par défaut, nous prendrons la modalité assertive.")
+        return 0
     return int(nb)
 
 
