@@ -45,54 +45,14 @@ def modif_f0(synthese, sentence, verb_index):
 
 
 def modif_duration_phrase(synthese, sentence, verb_index):
-    allongement = 2
+    allongement = 1.5
     modif = call(synthese, "To Manipulation", 0.01, 75, 600)
     duration_tier = call(modif, "Extract duration tier")
     call(duration_tier, "Remove points between", 0, synthese.duration)
-    call(duration_tier, "Add point", 0, 1)
-    call(duration_tier, "Add point", synthese.duration, 1)
-
     stressed_index = sentence.get_stressed_phoneme_index(verb_index)
-    call(duration_tier, "Add point", sentence.phonemes[stressed_index].xmin, 1)
-    call(duration_tier, "Add point", sentence.phonemes[stressed_index].xmax, 1)
-    call(duration_tier, "Add point", (sentence.phonemes[stressed_index].xmax + sentence.phonemes[stressed_index].xmin) / 2, allongement)
+    call(duration_tier, "Add point", sentence.phonemes[stressed_index].xmin - 0.5, 1)
+    call(duration_tier, "Add point", sentence.phonemes[stressed_index].xmin - 0.5 + 0.001, allongement)
+    call(duration_tier, "Add point", sentence.phonemes[stressed_index].xmax - 0.5 - 0.001, allongement)
+    call(duration_tier, "Add point", sentence.phonemes[stressed_index].xmax - 0.5, 1)
     call([modif, duration_tier], "Replace duration tier")
     return call(modif, "Get resynthesis (overlap-add)")
-
-    
-#     segmentation = textgrids.TextGrid("wav-files/synthese.TextGrid")
-#     phrase = segmentation["mots"]
-#     phonemes = segmentation["phonemes"]
-#     mot_a_allonger = phrase[0]
-#     for i, mot in enumerate(phrase):
-#         if mot.text in VERBS:
-#             mot_a_allonger = phrase[i - 1]
-#     if mot_a_allonger == phrase[0]:
-#         return
-#     print("je suis ici")
-#     for i, phoneme in enumerate(phonemes):
-#         if phonemes[i].xmin >= mot_a_allonger.xmin and phonemes[i].xmax <= mot_a_allonger.xmax:
-#             if is_stressed(phoneme, nb_phrase):
-#                 return modif_duration_phrase(synthese, phoneme)
-# 
-
-# def modif_duration_phrase2(synthese, phoneme):
-#     allongement = 2
-#     modif = call(synthese, "To Manipulation", 0.01, 75, 600)
-#     duration_tier = call(modif, "Extract duration tier")
-#     call(duration_tier, "Remove points between", 0, synthese.duration)
-#     call(duration_tier, "Add point", 0, 1)
-#     call(duration_tier, "Add point", synthese.duration, 1)
-#     call(duration_tier, "Add point", phoneme.xmin, 1)
-#     call(duration_tier, "Add point", phoneme.xmax, 1)
-#     call(duration_tier, "Add point", (phoneme.xmax + phoneme.xmin) / 2, allongement)
-#     call([modif, duration_tier], "Replace duration tier")
-#     return call(modif, "Get resynthesis (overlap-add)")
-# 
-
-# def is_stressed(phoneme, nb_phrase):
-#     if nb_phrase == 0:
-#         return phoneme.text == "0"
-#     if nb_phrase == 1:
-#         return phoneme.text == "a"
-#     return False
