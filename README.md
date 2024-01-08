@@ -8,8 +8,7 @@ First, clone this repository :
 git clone https://github.com/valentinefleith/SpeechSynthesis.git
 ```
 
-Make sure parselmouth and textgrids libs are installed.
-Otherwise, run the following :
+Make sure parselmouth and textgrids libs are installed by running the following command :
 ```
 make setup
 ```
