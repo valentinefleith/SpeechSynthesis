@@ -4,7 +4,7 @@ import sys
 import subprocess
 
 from synthese import get_extracts, synthetise
-from prosody import modif_f0, find_phoneme_to_lengthen
+from prosody import modif_prosody
 
 
 def main():
@@ -20,8 +20,9 @@ def main():
     sentence_nb = get_sentence_to_synthetise(phrases_ortho)
     extracts = get_extracts(phrases_ortho[sentence_nb].strip(), sound, phonemes)
     synthese = synthetise(sound, extracts)
-    synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
-    synthese = modif_f0(synthese, get_modalite())
+    #synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
+    synthese = modif_prosody(synthese, sentence_nb, get_modalite())
+    #synthese = modif_f0(synthese, get_modalite())
     #synthese = find_phoneme_to_lengthen(synthese, sentence_nb)
     synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
     subprocess.run(["open", f"wav-files/synthese_phrase{sentence_nb}.wav"])
@@ -42,10 +43,11 @@ def get_sentence_to_synthetise(phrases_ortho):
 
 
 def get_modalite():
-    print("Quelle modalité voulez-vous pour la phrase ?")
-    print("1 : Déclarative\n2 : Interrogative\n3:Exclamative")
+    print("\nQuelle modalité voulez-vous pour la phrase ?")
+    print("0 : Déclarative\n1 : Interrogative\n2 : Exclamative\n")
     nb = input("Entrez le numéro correspondant :")
     return int(nb)
+
 
 if __name__ == "__main__":
     main()
