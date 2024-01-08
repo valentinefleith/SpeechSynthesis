@@ -1,14 +1,6 @@
 # Diphone-synthesis
 Master's project of speech synthesis using diphones' concatenation wtih Praat.
 
-## Requirements
-
-Make sure parselmouth and textgrids libs are installed.
-```
-pip install praat-parselmouth
-pip install praat-textgrids
-```
-
 ## Usage
 
 First, clone this repository :
@@ -16,10 +8,14 @@ First, clone this repository :
 git clone https://github.com/valentinefleith/SpeechSynthesis.git
 ```
 
+Make sure parselmouth and textgrids libs are installed.
+Otherwise, run the following :
+```
+make setup
+```
+
 Then run the script using the following command :
 
 ```
-python3 src/main.py wav-files/Logatomes.wav wav-files/Logatomes.TextGrid
+make run
 ```
-
-Arguments are optional.
