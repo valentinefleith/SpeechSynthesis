@@ -38,9 +38,7 @@ def modif_f0(synthese, sentence, verb_index):
     if sentence.modalite == 0:
         call(pitch_tier, "Add point", synthese.duration - 0.0001, 180)
     elif sentence.modalite == 1:
-        call(pitch_tier, "Add point", synthese.duration - 0.0001, 250)
-    elif sentence.modalite == "exclamative":
-        call(pitch_tier, "Add point", synthese.duration - 0.0001, 180)
+        call(pitch_tier, "Add point", synthese.duration - 0.0001, 230)
     call(pitch_tier, "Add point", sentence.mots[verb_index].xmax, 210)
     call([modif, pitch_tier], "Replace pitch tier")
     return call(modif, "Get resynthesis (overlap-add)")
