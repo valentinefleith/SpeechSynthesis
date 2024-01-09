@@ -30,7 +30,7 @@ def get_sentence_to_synthetise(phrases_ortho):
         "Quelle phrase voulez-vous synthétiser ? Vous avez le choix entre les phrases suivantes :\n"
     )
     for i, phrase in enumerate(phrases_ortho):
-        print(f"{i}) {phrase.replace('tout', 'tous')}")
+        print(f"{i} : {phrase.replace('tout', 'tous')}")
     for i in range(3):
         nb = input("Entrez le numéro correspondant à la phrase : ")
         if not nb.isdigit() or int(nb) < 0 or int(nb) > 7:

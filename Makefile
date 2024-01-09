@@ -11,16 +11,17 @@ help:
 	@echo "------------------------------------------"
 
 run:
-	${PYTHON} ${SRC_DIR}/main.py
+	@${PYTHON} ${SRC_DIR}/main.py
 
 setup: requirements.txt
 	pip install -r requirements.txt
 
 pretty:
-	black ${SRC_DIR}
+	@black ${SRC_DIR}
 
 clean:
-	rm -rf ${SRC_DIR}/__pycache__
-	rm -rf utils/__pycache__
+	@rm -rf ${SRC_DIR}/__pycache__
+	@rm -rf utils/__pycache__
+	@echo "All __pycache__ cleaned !"
 
 .PHONY = help run setup pretty clean
