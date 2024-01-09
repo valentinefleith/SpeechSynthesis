@@ -17,7 +17,7 @@ def modif_prosody(synthese, sentence_nb, modalite):
     synthese.save(f"wav-files/synthese_phrase{sentence_nb}.wav", "WAV")
 
 
-def modif_duration(extraction, allongement):
+def accelerate_extract(extraction):
     """
     Il faut que l'extrait ait une f0 donc verifier nb value > 0
     """

@@ -5,14 +5,8 @@ import sys
 
 sys.path.insert(0, "utils")
 
-from prosody import modif_duration, modif_f0
+from prosody import accelerate_extract
 from conversion import convert_sentence_SAMPA
-
-
-def synthetise(sound, extracts):
-    synthese = sound.extract_part(0, 0.01, pm.WindowShape.RECTANGULAR, 1, False)
-    synthese = synthese.concatenate(extracts, overlap=0.03)
-    return synthese
 
 
 def get_extracts(phrase_ortho, sound, phonemes):
@@ -46,7 +40,7 @@ def extract_diphone(diphone, sound, phonemes):
                 1,
                 False,
             )
-            extract = modif_duration(extract, 0.85)
+            extract = accelerate_extract(extract)
             return extract
     return f"DIPHONE NOT FOUND : {diphone}"
 
@@ -55,3 +49,9 @@ def find_middle_phoneme(sound, phonemes, index):
     milieu = (phonemes[index].xmax + phonemes[index].xmin) / 2
     milieu = sound.get_nearest_zero_crossing(milieu, 1)
     return milieu
+
+
+def synthetise(sound, extracts):
+    synthese = sound.extract_part(0, 0.01, pm.WindowShape.RECTANGULAR, 1, False)
+    synthese = synthese.concatenate(extracts, overlap=0.03)
+    return synthese
